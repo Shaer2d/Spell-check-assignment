@@ -61,30 +61,36 @@ if (isset($_GET['submit'])){
       }
       break;
     case 'alice-linear':
+      $countwords=0;
       $st=microtime(true);
-      $index = linear($aliceArr, $in);
-      if ($index == -1) {
-        $et=microtime(true);
-          $tt=$et-$st;
-          echo "Not found"."\nTime taken:\n". $tt;
-      } else {
-        $et=microtime(true);
-        $tt=$et-$st;
-        echo "Found at index ", $index . "\nTime taken:\n".$tt;
+  
+      for($i=0;$i<count($aliceArr);$i++){
+        $in=$aliceArr[$i];
+        $index = linear($dictionaryArr,$in);
+        if($index==-1){
+          $countwords++;
+        }
       }
+      $et=microtime(true);
+      $tt=$et-$st;
+      echo "Total words not found .$countwords";
+      echo "Time taken:".$tt;
       break;
     case 'alice-binary':
+      $countwords=0;
       $st=microtime(true);
-      $index = binary($aliceArr, $in);
-      if ($index == -1) {
-        $et=microtime(true);
-          $tt=$et-$st;
-          echo "Not found"."\nTime taken:\n". $tt;
-      } else {
-        $et=microtime(true);
-        $tt=$et-$st;
-        echo "Found at index ", $index . "\nTime taken:\n".$tt;
+  
+      for($i=0;$i<count($aliceArr);$i++){
+        $in=$aliceArr[$i];
+        $index = binary($dictionaryArr,$in);
+        if($index==-1){
+          $countwords++;
+        }
       }
+      $et=microtime(true);
+      $tt=$et-$st;
+      echo "Total words not found ".$countwords;
+      echo "Time taken:".$tt;
       break;
   }
 }
@@ -102,7 +108,7 @@ function linear($arr, $item){
 
 function binary($arr, $item){
    
-    sort($arr);
+ 
     $low = 0;
     $high = sizeof($arr) - 1;
     while ($low <= $high) {
