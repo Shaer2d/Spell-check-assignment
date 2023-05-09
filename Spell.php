@@ -73,7 +73,7 @@ if (isset($_GET['submit'])){
       }
       $et=microtime(true);
       $tt=$et-$st;
-      echo "Total words not found .$countwords";
+      echo "Total words not found ".$countwords;
       echo "Time taken:".$tt;
       break;
     case 'alice-binary':
